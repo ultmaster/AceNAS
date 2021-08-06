@@ -1,0 +1,21 @@
+_base_: ./pnas.yml
+dataset:
+  data_dir: /path/to/imagenet
+  dataset_cls: imagenet
+  num_threads: 1
+trainer:
+  batch_size: 40
+  num_epochs: 100
+  optimizer:
+    learning_rate: 0.025
+  lr_scheduler:
+    warmup_epochs: 5
+model:
+  init_channels: [32, 48, 64, 80]
+  num_layers: [6, 10, 14, 18, 22]
+  model_type: imagenet
+sampler:
+  num_architectures_per_test: 10
+metrics:
+  metrics_fn: top5
+  loss_fn: labelsmoothing

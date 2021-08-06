@@ -1,0 +1,13 @@
+_base_: ./darts.yml
+model:
+  op_candidates:
+    - sep_conv_3x3
+    - sep_conv_5x5
+    - sep_conv_7x7
+    - conv_7x1_1x7
+    - skip_connect
+    - avg_pool_3x3
+    - max_pool_3x3
+    - dil_conv_3x3
+  n_nodes: 5
+  concat_all: true

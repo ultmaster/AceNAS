@@ -1,0 +1,6 @@
+_base_: ./amoeba.yml
+model:
+  init_channels: [32, 48, 64, 80]
+  num_layers: [6, 10, 14, 18, 22]
+trainer:
+  batch_size: 64

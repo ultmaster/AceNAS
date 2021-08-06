@@ -1,0 +1,76 @@
+model:
+  stem_width: 32
+  final_width: 1280
+  width_mult: 1.0
+  num_labels: 1000
+  stages:
+  - depth_range: [1, 1]
+    exp_ratio_range: [1]
+    kernel_size_range: [3]
+    width: 16
+    downsample: False
+  - depth_range: [1, 4]
+    exp_ratio_range: [3, 6]
+    kernel_size_range: [3, 5, 7]
+    width: 32
+    downsample: True
+  - depth_range: [1, 4]
+    exp_ratio_range: [3, 6]
+    kernel_size_range: [3, 5, 7]
+    width: 40
+    downsample: True
+  - depth_range: [1, 4]
+    exp_ratio_range: [3, 6]
+    kernel_size_range: [3, 5, 7]
+    width: 80
+    downsample: True
+  - depth_range: [1, 4]
+    exp_ratio_range: [3, 6]
+    kernel_size_range: [3, 5, 7]
+    width: 96
+    downsample: False
+  - depth_range: [1, 4]
+    exp_ratio_range: [3, 6]
+    kernel_size_range: [3, 5, 7]
+    width: 192
+    downsample: True
+  - depth_range: [1, 1]
+    exp_ratio_range: [3, 6]
+    kernel_size_range: [3, 5, 7]
+    width: 320
+    downsample: False
+metrics:
+  loss_fn: labelsmoothing
+  metrics_fn: top5
+  reward_key: top1
+runtime:
+  seed: 42
+dataset:
+  data_dir: /path/to/imagenet
+  dataset_cls: imagenet
+  num_threads: 6
+  test_on_val: true
+sampler:
+  sampler_type: naive
+  warmup_epochs: 5
+  num_architectures_per_test: 20
+  eval_on_testset: true
+  profile_on_testset: true
+trainer:
+  console_log_interval: 20
+  tb_log_interval: 20
+  lr_scheduler:
+    warmup_epochs: 5
+    scheduler_type: cosinelr
+    eta_min: 0.
+  batch_size: 128
+  val_batch_size: 200
+  num_epochs: 360
+  optimizer:
+    opt_type: sgd
+    learning_rate: 0.03
+    weight_decay: 5.0e-5
+    momentum: 0.9
+  save_ckpt_every_n_epoch: 5
+  test_every_n_epoch: 1000000  # only at the end
+  val_every_n_epoch: 20

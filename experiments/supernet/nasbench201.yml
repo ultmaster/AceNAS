@@ -1,0 +1,41 @@
+model:
+  stem_out_channels: 16
+  num_stacks: 3
+  num_modules_per_stack: 5
+  num_labels: 100
+metrics:
+  loss_fn: crossentropy
+  metrics_fn: top1
+  reward_key: top1
+runtime:
+  seed: 42
+dataset:
+  cutout: 0
+  data_dir: ./data/cifar100
+  dataset_cls: cifar100
+  num_threads: 6
+  test_on_val: true
+sampler:
+  sampler_type: naive
+  warmup_epochs: 5
+  num_architectures_per_test: 20
+  eval_on_testset: true
+  profile_on_testset: true
+trainer:
+  console_log_interval: 20
+  tb_log_interval: 20
+  lr_scheduler:
+    scheduler_type: cosinelr
+    eta_min: 0.
+  batch_size: 192
+  val_batch_size: 512
+  num_epochs: 600
+  optimizer:
+    opt_type: sgd
+    learning_rate: 0.05
+    weight_decay: 1.0e-4
+    momentum: 0.9
+    grad_clip: 5.
+  save_ckpt_every_n_epoch: 5
+  test_every_n_epoch: 50
+  val_every_n_epoch: 50

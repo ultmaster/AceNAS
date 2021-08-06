@@ -1,0 +1,6 @@
+_base_: ./nasbench201.yml
+dataset:
+  data_dir: ./data/cifar10
+  dataset_cls: cifar10
+model:
+  num_labels: 10

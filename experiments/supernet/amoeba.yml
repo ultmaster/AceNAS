@@ -1,0 +1,16 @@
+_base_: ./darts.yml
+model:
+  op_candidates:
+    - skip_connect
+    - sep_conv_3x3
+    - sep_conv_5x5
+    - sep_conv_7x7
+    - avg_pool_3x3
+    - max_pool_3x3
+    - dil_sep_conv_3x3
+    - conv_7x1_1x7
+  n_nodes: 5
+  concat_all: false
+trainer:
+  val_batch_size: 512
+  batch_size: 96
